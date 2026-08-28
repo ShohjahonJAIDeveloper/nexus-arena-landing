@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Вход · NEXUS Arena</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="login-page">
+  <form class="login" id="login-form">
+    <div class="login__logo">◤</div>
+    <h1>Панель заявок</h1>
+    <p class="muted">Служебный раздел NEXUS Arena. Введите пароль администратора.</p>
+    <label class="field">
+      <span>Пароль</span>
+      <input type="password" id="password" autocomplete="current-password" autofocus required>
+    </label>
+    <div class="error" id="login-error"></div>
+    <button class="btn btn--primary" type="submit" id="login-submit">Войти</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const error = document.getElementById('login-error');
+    const submit = document.getElementById('login-submit');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      error.textContent = '';
+      submit.disabled = true;
+      submit.textContent = 'Проверяем…';
+      try {
+        const response = await fetch('/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: document.getElementById('password').value }),
+        });
+        const data = await response.json();
+        if (data.ok) { location.reload(); return; }
+        error.textContent = response.status === 429
+          ? 'Слишком много попыток. Подождите 15 минут.'
+          : (data.error || 'Не удалось войти');
+      } catch (e) {
+        error.textContent = 'Сервер недоступен';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Войти';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Заявки · NEXUS Arena</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="topbar__logo">◤</div>
+      <div>
+        <div class="topbar__title">Заявки NEXUS Arena</div>
+        <div class="muted" style="font-size:0.85rem">Скрытая панель администратора</div>
+      </div>
+      <div class="topbar__actions">
+        <button class="btn" id="refresh">↻ Обновить</button>
+        <a class="btn" href="/api/admin/export.csv">⤓ Экспорт CSV</a>
+        <a class="btn" href="/" target="_blank" rel="noopener">Сайт</a>
+        <button class="btn" id="logout">Выйти</button>
+      </div>
+    </header>
+
+    <section class="cards" id="stats"></section>
+
+    <section class="filters">
+      <label class="field field--grow">
+        <span>Поиск по имени, телефону, комментарию</span>
+        <input type="search" id="filter-q" placeholder="Например: Азиз или 9012345">
+      </label>
+      <label class="field">
+        <span>Статус</span>
+        <select id="filter-status">
+          <option value="">Все</option>
+          <option value="new">Новые</option>
+          <option value="in_work">В работе</option>
+          <option value="done">Готово</option>
+          <option value="spam">Спам</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Источник</span>
+        <select id="filter-source">
+          <option value="">Любой</option>
+          <option value="form">Форма</option>
+          <option value="quiz">Квиз</option>
+          <option value="chat">Чат</option>
+        </select>
+      </label>
+    </section>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th>Клиент</th>
+            <th>Источник</th>
+            <th>Комментарий / квиз</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>Заявок пока нет</div>
+    </div>
+
+    <div class="pager">
+      <button class="btn" id="prev">← Назад</button>
+      <span class="muted" id="pager-info"></span>
+      <button class="btn" id="next">Вперёд →</button>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer">
+    <div class="drawer__panel" id="drawer-panel"></div>
+  </div>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

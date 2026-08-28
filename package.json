@@ -1,0 +1,27 @@
+{
+  "name": "nexus-arena-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Продающий лендинг компьютерного клуба с ИИ-помощником, админкой и уведомлениями в Telegram",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "nodemon --watch server --ext js,html,css server/index.js",
+    "start": "node server/index.js",
+    "tg:test": "node scripts/telegram-test.js",
+    "db:stats": "node scripts/db-stats.js",
+    "db:reset": "node scripts/db-reset.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

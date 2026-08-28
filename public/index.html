@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXUS Arena — компьютерный клуб в Ташкенте: RTX 4070, 240 Гц, 24/7</title>
+  <meta name="description" content="Компьютерный клуб NEXUS Arena: 40 станций на RTX 4070, мониторы 240 Гц, VIP-комнаты, PS5-зона и буткемп с тренером. Бронь за минуту, первый час бесплатно.">
+  <meta name="theme-color" content="#07070c">
+  <meta property="og:title" content="NEXUS Arena — компьютерный клуб в Ташкенте">
+  <meta property="og:description" content="RTX 4070, 240 Гц, интернет 1 Гбит/с. Забронируйте место за минуту — первый час бесплатно.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/sections.css">
+  <link rel="stylesheet" href="/styles/animations.css">
+  <link rel="stylesheet" href="/styles/assistant.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/build/three.module.js",
+      "gsap": "/vendor/gsap/index.js",
+      "gsap/ScrollTrigger": "/vendor/gsap/ScrollTrigger.js",
+      "lenis": "/vendor/lenis/dist/lenis.mjs"
+    }
+  }
+  </script>
+</head>
+<body>
+  <i class="progress-bar" id="progress-bar"></i>
+  <div class="cursor" id="cursor"></div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#hero" class="logo">
+        <span class="logo__mark">◤</span>
+        <span>NEXUS <span class="grad-text">Arena</span></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#features">Преимущества</a>
+        <a href="#zones">Зоны и цены</a>
+        <a href="#how">Как это работает</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#lead" class="nav__cta">Забронировать место</a>
+      </nav>
+      <div class="header__cta">
+        <a class="header__phone" href="tel:+998901234567">+998 90 123-45-67</a>
+        <a class="btn btn--primary" href="#lead">Забронировать</a>
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ Первый экран ======================== -->
+    <section class="hero" id="hero">
+      <div class="hero__fallback" id="hero-fallback"></div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero__veil"></div>
+
+      <div class="container">
+        <div class="hero__content">
+          <span class="eyebrow" data-reveal>Компьютерный клуб в Ташкенте · 24/7</span>
+          <h1 data-reveal>
+            Игровые станции, на которых<br>
+            <span class="grad-text">не бывает просадок</span>
+          </h1>
+          <p class="hero__lead" data-reveal>
+            40 мест на RTX 4070, мониторы 240 Гц и интернет 1 Гбит/с. VIP-комнаты для команды,
+            PS5-зона для компании и буткемп с тренером — приходите играть, всё остальное на нас.
+          </p>
+          <div class="hero__actions" data-reveal>
+            <a class="btn btn--primary" href="#lead">Забронировать место</a>
+            <button class="btn" type="button" data-assistant-open data-assistant-quiz>
+              ⚡ Подобрать тариф за 30 секунд
+            </button>
+          </div>
+          <div class="hero__chips" data-reveal>
+            <span class="chip"><b>RTX 4070</b> и выше</span>
+            <span class="chip"><b>240 Гц</b> мониторы</span>
+            <span class="chip"><b>3–8 мс</b> пинг</span>
+            <span class="chip"><b>Первый час</b> бесплатно</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true"><span></span>Листайте вниз</div>
+    </section>
+
+    <!-- =============================== Цифры =========================== -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats__grid" data-reveal>
+          <div class="stat"><div class="stat__value" data-count="40">0</div><div class="stat__label">игровых станций</div></div>
+          <div class="stat"><div class="stat__value" data-count="120" data-suffix="+">0</div><div class="stat__label">игр установлено</div></div>
+          <div class="stat"><div class="stat__value" data-count="8">0</div><div class="stat__label">турниров в месяц</div></div>
+          <div class="stat"><div class="stat__value" data-count="4.9" data-decimals="1">0</div><div class="stat__label">рейтинг гостей</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Бегущая строка ====================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>CS2</span><span>Dota 2</span><span>Valorant</span><span>PUBG</span><span>Apex Legends</span>
+        <span>GTA V</span><span>Fortnite</span><span>League of Legends</span><span>Rust</span><span>FC 26</span>
+      </div>
+      <div class="marquee__track" aria-hidden="true">
+        <span>CS2</span><span>Dota 2</span><span>Valorant</span><span>PUBG</span><span>Apex Legends</span>
+        <span>GTA V</span><span>Fortnite</span><span>League of Legends</span><span>Rust</span><span>FC 26</span>
+      </div>
+    </div>
+
+    <!-- ============================ Преимущества ======================== -->
+    <section class="section" id="features">
+      <div class="glow-orb glow-orb--violet parallax" style="width:420px;height:420px;top:-60px;left:-120px" data-parallax="0.18"></div>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Почему сюда возвращаются</span>
+          <h2 data-reveal>Клуб, где всё готово <span class="grad-text">к вашей катке</span></h2>
+          <p data-reveal>Никаких «подождите, перезагрузим». Мы следим за железом, интернетом и чистотой, чтобы вы просто садились и играли.</p>
+        </div>
+
+        <div class="features__grid">
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">🎮</div>
+            <h3>Топовое железо</h3>
+            <p>RTX 4070 и 4080 Super, процессоры 13–14 поколения, 32 ГБ DDR5. Любая игра идёт на ультрах без фризов.</p>
+          </article>
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">🖥️</div>
+            <h3>Мониторы 240 Гц</h3>
+            <p>27 дюймов, 1 мс отклика, в VIP — 360 Гц. Разница видна с первой же перестрелки.</p>
+          </article>
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">⌨️</div>
+            <h3>Периферия про-уровня</h3>
+            <p>Logitech G Pro X Superlight, механика на свитчах, наушники HyperX. Свою мышку тоже можно.</p>
+          </article>
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">📡</div>
+            <h3>Интернет 1 Гбит/с</h3>
+            <p>Пинг до серверов CS2 в Ташкенте — 3–8 мс. Канал резервируется под игровой трафик.</p>
+          </article>
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">🛋️</div>
+            <h3>Зоны под задачу</h3>
+            <p>Общий зал, закрытые VIP-комнаты, PS5 с диваном и буткемп с тренером — выбирайте под настроение.</p>
+          </article>
+          <article class="card feature tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="feature__icon">☕</div>
+            <h3>Бар и кухня</h3>
+            <p>Кофе, энергетики, бургеры и пицца приносят прямо к месту. Отрываться от игры не нужно.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== Зоны ============================= -->
+    <section class="section" id="zones">
+      <div class="glow-orb glow-orb--cyan parallax" style="width:380px;height:380px;top:120px;right:-140px" data-parallax="-0.14"></div>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Зоны и цены</span>
+          <h2 data-reveal>Выберите свой <span class="grad-text">формат игры</span></h2>
+          <p data-reveal>Цены честные и без звёздочек. Пакеты и абонементы считаем автоматически — переплачивать не придётся.</p>
+        </div>
+
+        <div class="zones__grid">
+          <article class="card zone tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="zone__title">Standard</div>
+            <div class="zone__price">15 000 <small>сум за час · 40 мест</small></div>
+            <div class="zone__specs">RTX 4070 · i5-13600KF · 32 ГБ DDR5 · 27" 240 Гц</div>
+            <ul class="zone__list">
+              <li>Кресла DXRacer</li>
+              <li>Наушники HyperX Cloud III</li>
+              <li>Пакет 5 часов — 60 000 сум</li>
+            </ul>
+            <button class="btn" type="button" data-assistant-open data-assistant-quiz="standard">Хочу сюда</button>
+          </article>
+
+          <article class="card zone tilt is-featured" data-reveal>
+            <div class="tilt__shine"></div>
+            <span class="zone__badge">Хит</span>
+            <div class="zone__title">VIP-комната</div>
+            <div class="zone__price">25 000 <small>сум за час · 8 мест</small></div>
+            <div class="zone__specs">RTX 4080 Super · i7-14700K · 32 ГБ DDR5 · 27" 360 Гц</div>
+            <ul class="zone__list">
+              <li>Закрытая комната только для вас</li>
+              <li>Свой свет и кондиционер</li>
+              <li>Чай и снеки бесплатно</li>
+            </ul>
+            <button class="btn btn--primary" type="button" data-assistant-open data-assistant-quiz="vip">Забронировать VIP</button>
+          </article>
+
+          <article class="card zone tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="zone__title">PS5-зона</div>
+            <div class="zone__price">30 000 <small>сум за час · за комнату</small></div>
+            <div class="zone__specs">PlayStation 5 · телевизор 65" 120 Гц · 4 геймпада</div>
+            <ul class="zone__list">
+              <li>FC 26, Mortal Kombat 1, God of War</li>
+              <li>Диван на четверых</li>
+              <li>Цена за комнату, а не с человека</li>
+            </ul>
+            <button class="btn" type="button" data-assistant-open data-assistant-quiz="ps5">Хочу сюда</button>
+          </article>
+
+          <article class="card zone tilt" data-reveal>
+            <div class="tilt__shine"></div>
+            <div class="zone__title">Буткемп</div>
+            <div class="zone__price">490 000 <small>сум в месяц · 10 мест</small></div>
+            <div class="zone__specs">VIP-места + тренер по CS2 и Dota 2</div>
+            <ul class="zone__list">
+              <li>8 тренировок в месяц</li>
+              <li>Разбор демок и статистики</li>
+              <li>Первая тренировка бесплатно</li>
+            </ul>
+            <button class="btn" type="button" data-assistant-open data-assistant-quiz="bootcamp">Пробная тренировка</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================== Как это работает ====================== -->
+    <section class="section steps" id="how">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Как это работает</span>
+          <h2 data-reveal>От заявки до первой катки — <span class="grad-text">15 минут</span></h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="steps__track" id="steps-track">
+          <article class="step" data-reveal>
+            <div class="step__num">01</div>
+            <h3>Оставляете заявку</h3>
+            <p>Через форму на сайте или помощника в углу экрана. Займёт меньше минуты.</p>
+          </article>
+          <article class="step" data-reveal>
+            <div class="step__num">02</div>
+            <h3>Мы перезваниваем</h3>
+            <p>Администратор связывается в течение 15 минут, подтверждает зону и время.</p>
+          </article>
+          <article class="step" data-reveal>
+            <div class="step__num">03</div>
+            <h3>Приходите к своему месту</h3>
+            <p>Оно уже включено, обновлено и продезинфицировано. Держим бронь 20 минут.</p>
+          </article>
+          <article class="step" data-reveal>
+            <div class="step__num">04</div>
+            <h3>Играете и возвращаетесь</h3>
+            <p>Платите после игры, копите часы по абонементу и участвуете в турнирах клуба.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== Отзывы ============================ -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Отзывы гостей</span>
+          <h2 data-reveal>4.9 из 5 — <span class="grad-text">по 380 отзывам</span></h2>
+          <p data-reveal>Собрали то, что чаще всего пишут в Google и Telegram-чате клуба.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="reviews__viewport" id="reviews-viewport">
+          <div class="reviews__track" id="reviews-track">
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">АК</div>
+                <div><div class="review__name">Азиз К.</div><div class="review__meta">играет в CS2 · 2 года с нами</div></div>
+              </div>
+              <div class="review__stars">★★★★★</div>
+              <p>Пинг реально 4 мс, за два года ни одного лага. Раньше играл дома и постоянно ловил тимауты — тут забыл, что это такое.</p>
+            </article>
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">МР</div>
+                <div><div class="review__name">Марина Р.</div><div class="review__meta">отмечала день рождения</div></div>
+              </div>
+              <div class="review__stars">★★★★★</div>
+              <p>Заказывали VIP на 8 человек для дня рождения брата. Торт, фотозона, всё организовали сами. Дети в восторге, взрослые тоже залипли.</p>
+            </article>
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">ТС</div>
+                <div><div class="review__name">Тимур С.</div><div class="review__meta">команда Dota 2</div></div>
+              </div>
+              <div class="review__stars">★★★★★</div>
+              <p>Ходим составом на буткемп. Тренер разбирает наши игры по минутам — за три месяца поднялись с Legend до Ancient.</p>
+            </article>
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">ДЖ</div>
+                <div><div class="review__name">Джасур Ж.</div><div class="review__meta">ночные сессии</div></div>
+              </div>
+              <div class="review__stars">★★★★★</div>
+              <p>Ночной пакет — лучшее, что есть в городе. 70 тысяч за всю ночь, кофе бесплатно доливают, к утру ещё и завтрак приносят.</p>
+            </article>
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">ЕВ</div>
+                <div><div class="review__name">Елена В.</div><div class="review__meta">приходит с сыном</div></div>
+              </div>
+              <div class="review__stars">★★★★☆</div>
+              <p>Чисто, спокойно, администраторы следят за порядком. Сына отпускаю без переживаний. Единственное — в выходные лучше бронировать заранее.</p>
+            </article>
+            <article class="card review">
+              <div class="review__top">
+                <div class="review__avatar">РН</div>
+                <div><div class="review__name">Рустам Н.</div><div class="review__meta">PS5-зона</div></div>
+              </div>
+              <div class="review__stars">★★★★★</div>
+              <p>Брали PS5 на четверых в FC 26. Оплата за комнату, а не с человека — вышло дешевле кино. Вернёмся точно.</p>
+            </article>
+          </div>
+        </div>
+        <div class="reviews__nav">
+          <button type="button" id="reviews-prev" aria-label="Предыдущий отзыв">←</button>
+          <button type="button" id="reviews-next" aria-label="Следующий отзыв">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== FAQ ============================== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-reveal>Частые вопросы</span>
+          <h2 data-reveal>Отвечаем <span class="grad-text">заранее</span></h2>
+        </div>
+
+        <div class="faq" id="faq-list">
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Нужно ли бронировать заранее?</button>
+            <div class="faq__a"><div><p>В будни днём почти всегда есть свободные места. Вечером с 18:00 и в выходные лучше забронировать — бронь бесплатная, место держим 20 минут.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Со скольки лет пускаете?</button>
+            <div class="faq__a"><div><p>С 14 лет самостоятельно, до 14 — в сопровождении взрослого. После 22:00 несовершеннолетним нужно письменное согласие родителей и документ.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Можно прийти со своей мышкой и наушниками?</button>
+            <div class="faq__a"><div><p>Конечно. На каждом месте свободные USB-порты и разъём для гарнитуры. Свои аккаунты Steam и Epic тоже подходят — после выхода сессия автоматически очищается.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Как оплатить?</button>
+            <div class="faq__a"><div><p>Наличными, картой Uzcard/Humo, через Payme или Click, а также переводом. Для компаний делаем один общий счёт.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Что входит в ночной пакет?</button>
+            <div class="faq__a"><div><p>С 22:00 до 08:00 — 70 000 сум за всю ночь в зоне Standard, кофе и чай без ограничений. В VIP ночной пакет считается индивидуально.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Есть ли скидки?</button>
+            <div class="faq__a"><div><p>Студентам −20% в будни с 09:00 до 17:00, абонемент на 30 часов стоит 350 000 сум и действует 60 дней. Новым гостям по заявке с сайта первый час бесплатно.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Можно отметить день рождения?</button>
+            <div class="faq__a"><div><p>Да. VIP-комната на 4 часа, торт и фотозона — от 600 000 сум на компанию до 8 человек. Для корпоративов бронируем весь зал.</p></div></div>
+          </div>
+          <div class="faq__item" data-reveal>
+            <button class="faq__q" type="button">Что если я опоздаю или не смогу прийти?</button>
+            <div class="faq__a"><div><p>Держим место 20 минут, потом отдаём в общий зал. Позвоните — перенесём бронь бесплатно, никаких штрафов у нас нет.</p></div></div>
+          </div>
+        </div>
+
+        <div class="faq__cta" data-reveal>
+          <div><b>Не нашли ответ?</b><br><span class="muted">Спросите помощника — он отвечает мгновенно и круглосуточно.</span></div>
+          <button class="btn" type="button" data-assistant-open>💬 Задать вопрос помощнику</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Форма заявки ======================== -->
+    <section class="section" id="lead">
+      <div class="container">
+        <div class="lead" data-reveal>
+          <div class="glow-orb glow-orb--magenta" style="width:340px;height:340px;bottom:-120px;right:-100px"></div>
+          <div class="lead__grid">
+            <div>
+              <span class="eyebrow">Бронь за минуту</span>
+              <h2>Первый час — <span class="grad-text">бесплатно</span></h2>
+              <p class="muted">Оставьте номер: администратор перезвонит в течение 15 минут, подберёт зону и закрепит место за вами.</p>
+              <ul class="lead__benefits">
+                <li>Бронь бесплатная, отмена в любой момент</li>
+                <li>Подберём зону под компанию и бюджет</li>
+                <li>Расскажем про акции, которые действуют сегодня</li>
+                <li>Работаем круглосуточно — звоним даже ночью</li>
+              </ul>
+            </div>
+
+            <form class="form" id="lead-form" novalidate>
+              <div class="form__body">
+                <div class="field">
+                  <label for="name">Как вас зовут</label>
+                  <input type="text" id="name" name="name" placeholder="Шохжахон" autocomplete="name" required>
+                  <div class="field__error" data-error-for="name"></div>
+                </div>
+
+                <div class="field">
+                  <label for="phone">Телефон</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+998 90 123-45-67" autocomplete="tel" required>
+                  <div class="field__error" data-error-for="phone"></div>
+                </div>
+
+                <div class="field">
+                  <label>Как удобнее связаться</label>
+                  <div class="choices">
+                    <label class="choice"><input type="radio" name="contactChannel" value="call" checked><span>📞 Звонок</span></label>
+                    <label class="choice"><input type="radio" name="contactChannel" value="telegram"><span>✈️ Telegram</span></label>
+                    <label class="choice"><input type="radio" name="contactChannel" value="whatsapp"><span>💬 WhatsApp</span></label>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="message">Комментарий <span class="muted">— необязательно</span></label>
+                  <textarea id="message" name="message" placeholder="Например: нас пятеро, хотим VIP в субботу вечером"></textarea>
+                  <div class="field__error" data-error-for="message"></div>
+                </div>
+
+                <div class="honeypot" aria-hidden="true">
+                  <label>Компания<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                </div>
+
+                <button class="btn btn--primary btn--wide" type="submit" id="lead-submit">Забронировать место</button>
+                <p class="form__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных. Спам не рассылаем.</p>
+              </div>
+
+              <div class="form__success">
+                <div class="form__success-icon">✓</div>
+                <h3>Заявка принята!</h3>
+                <p class="muted" id="lead-success-text">Администратор перезвонит в течение 15 минут.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =============================== Подвал ============================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="#hero" class="logo"><span class="logo__mark">◤</span><span>NEXUS <span class="grad-text">Arena</span></span></a>
+          <p class="muted" style="margin-top:16px">Компьютерный клуб в Ташкенте. 40 станций, VIP-комнаты, PS5 и буткемп. Работаем круглосуточно, без выходных.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <div class="footer__links">
+            <a href="tel:+998901234567">+998 90 123-45-67</a>
+            <a href="https://t.me/nexus_arena" target="_blank" rel="noopener">Telegram: @nexus_arena</a>
+            <span class="muted">Ташкент, ул. Амира Темура, 15</span>
+            <span class="muted">ТЦ «Пойтахт», 2 этаж</span>
+          </div>
+        </div>
+        <div>
+          <h4>Разделы</h4>
+          <div class="footer__links">
+            <a href="#zones">Зоны и цены</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#faq">Частые вопросы</a>
+            <a href="#lead">Забронировать</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> NEXUS Arena. Все права защищены.</span>
+        <span>Открыто 24/7 · первый час бесплатно для новых гостей</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================ ИИ-помощник =========================== -->
+  <div class="assistant" id="assistant">
+    <div class="assistant__panel" role="dialog" aria-label="Помощник клуба">
+      <div class="assistant__head">
+        <div class="assistant__avatar">🤖</div>
+        <div>
+          <div class="assistant__title">Помощник NEXUS</div>
+          <div class="assistant__status">отвечает мгновенно</div>
+        </div>
+        <button class="assistant__close" id="assistant-close" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="assistant__progress"><i id="assistant-progress"></i></div>
+      <div class="assistant__log" id="assistant-log"></div>
+      <div class="assistant__replies" id="assistant-replies"></div>
+      <form class="assistant__form" id="assistant-form">
+        <input type="text" id="assistant-input" placeholder="Спросите про цены, зоны, турниры…" autocomplete="off">
+        <button class="assistant__send" type="submit" aria-label="Отправить">➤</button>
+      </form>
+    </div>
+
+    <button class="assistant__toggle" id="assistant-toggle">
+      <span class="assistant__pulse"></span>
+      <span class="assistant__toggle-icon">🤖</span>
+      <span>Помощник</span>
+    </button>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+/* ================= Базовые токены и общие элементы ================= */
+:root {
+  --bg: #07070c;
+  --bg-2: #0b0b14;
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-2: rgba(255, 255, 255, 0.075);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text: #eceefb;
+  --muted: #9399b4;
+  --cyan: #22d3ee;
+  --violet: #7c3aed;
+  --magenta: #e935c1;
+  --lime: #a3e635;
+  --grad: linear-gradient(120deg, var(--cyan), var(--violet) 55%, var(--magenta));
+  --glow: 0 0 42px rgba(34, 211, 238, 0.28);
+  --radius: 22px;
+  --radius-sm: 14px;
+  --container: 1180px;
+  --font: "Segoe UI", system-ui, -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --header-h: 72px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Горизонтальную прокрутку страницы не допускаем: закреплённая секция
+     «Как это работает» шире экрана и иначе растягивает документ. */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+html.lenis { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  /* Мягкое неоновое свечение фона страницы */
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60% 45% at 15% 0%, rgba(124, 58, 237, 0.22), transparent 65%),
+    radial-gradient(50% 40% at 85% 10%, rgba(34, 211, 238, 0.18), transparent 65%),
+    radial-gradient(70% 60% at 50% 100%, rgba(233, 53, 193, 0.12), transparent 70%),
+    var(--bg);
+}
+
+body::after {
+  /* Зернистость поверх фона — убирает «пластиковость» градиентов */
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image: url("/assets/noise.svg");
+}
+
+img, svg, canvas { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+
+h1, h2, h3, h4 {
+  margin: 0 0 0.4em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.15rem, 2vw, 1.45rem); }
+p { margin: 0 0 1em; }
+
+.container {
+  width: min(100% - 40px, var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  /* Светящиеся пятна намеренно выходят за края секции — обрезаем их здесь,
+     иначе документ становится шире экрана. */
+  overflow: hidden;
+  padding: clamp(64px, 9vw, 120px) 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 7px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.section-head { max-width: 720px; margin-bottom: clamp(36px, 5vw, 60px); }
+.section-head p { color: var(--muted); font-size: 1.06rem; margin: 0; }
+
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.muted { color: var(--muted); }
+
+/* ------------------------------ Кнопки ------------------------------ */
+.btn {
+  --btn-bg: var(--panel-2);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--text);
+  font-weight: 650;
+  font-size: 0.97rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s, border-color 0.25s;
+}
+
+.btn::after {
+  /* Подсветка, которая следует за курсором (координаты задаёт JS) */
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.btn:hover { transform: translateY(-2px); border-color: var(--cyan); box-shadow: var(--glow); }
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+.btn--primary {
+  border: none;
+  background: var(--grad);
+  color: #08080f;
+  font-weight: 800;
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.35);
+}
+
+.btn--primary:hover { box-shadow: 0 16px 50px rgba(34, 211, 238, 0.45); }
+.btn--wide { width: 100%; }
+.btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ------------------------------ Карточки ---------------------------- */
+.card {
+  position: relative;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, var(--panel-2), var(--panel));
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(34, 211, 238, 0.45), transparent 40%, rgba(233, 53, 193, 0.35));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.card:hover::before { opacity: 1; }
+
+/* ------------------------------ Шапка ------------------------------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+.header.is-stuck {
+  background: rgba(7, 7, 12, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-bottom-color: var(--line);
+}
+
+.header__inner { display: flex; align-items: center; gap: 28px; width: 100%; }
+
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; }
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--grad);
+  color: #07070c;
+  font-size: 1.05rem;
+  box-shadow: var(--glow);
+}
+
+.nav { display: flex; gap: 24px; margin-left: auto; }
+.nav a { position: relative; white-space: nowrap; color: var(--muted); font-size: 0.95rem; transition: color 0.2s; }
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--grad);
+  transition: width 0.3s;
+}
+.nav a:hover { color: var(--text); }
+.nav a:hover::after { width: 100%; }
+
+.header__cta { display: flex; align-items: center; gap: 14px; }
+.header__phone { font-weight: 700; white-space: nowrap; }
+
+.nav__cta { display: none; }
+.burger { display: none; width: 42px; height: 42px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--panel); cursor: pointer; }
+
+/* Прогресс чтения страницы */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--grad);
+  z-index: 70;
+}
+
+/* ------------------------------ Подвал ------------------------------ */
+.footer { padding: 70px 0 40px; border-top: 1px solid var(--line); background: rgba(7, 7, 12, 0.6); }
+.footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+.footer h4 { font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.footer__links { display: grid; gap: 10px; }
+.footer__links a:hover { color: var(--cyan); }
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 46px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 1180px) {
+  .header__inner { gap: 18px; }
+  .nav { gap: 16px; }
+  .nav a { font-size: 0.88rem; }
+  .header__phone { font-size: 0.9rem; }
+}
+
+@media (max-width: 700px) {
+  /* На узких экранах кнопка из шапки переезжает в меню — иначе не влезает бургер */
+  .header__cta > .btn { display: none; }
+  .header__inner { gap: 12px; }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto;
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 20px 22px;
+    background: rgba(9, 9, 16, 0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-120%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav.is-open { transform: translateY(0); }
+  .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+  .burger { display: block; margin-left: auto; }
+  .header__phone { display: none; }
+  .nav__cta {
+    display: block;
+    margin-top: 14px;
+    padding: 15px 0 !important;
+    border: none !important;
+    border-radius: 14px;
+    background: var(--grad);
+    color: #07070c !important;
+    font-weight: 800;
+    text-align: center;
+  }
+  .nav__cta::after { display: none; }
+  .footer__grid { grid-template-columns: 1fr; }
+}
